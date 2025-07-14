@@ -12,12 +12,12 @@ Usage: 2fa [options] [name]
 
 Options:
   -a         Sort output alphabetically by site name
-  -f         Sort output in the order of the .2fa file (default)
-  --help     Show this help message and exit
+  -f         Sort output in the order of the ~/.2fa file (default)
   -add NAME  Add a new key for NAME to the ~/.2fa file (will prompt for secret)
+  --help     Show this help message and exit
 
 Arguments:
-  name       (Optional) Only print the code for the given site name
+  name       (Optional) Only print the code for the specified site (N.B. name must match ~/.2fa config file)
 
 Setup:
   Create a ~/.2fa file with one entry per line in the format:
