@@ -48,6 +48,7 @@ Options:
   -a         Sort output alphabetically by site name
   -f         Sort output in the order of the .2fa file (default)
   --help     Show this help message and exit
+  -add NAME  Add a new key for NAME to the ~/.2fa file (will prompt for secret)
 
 Arguments:
   name       (Optional) Only print the code for the given site name
@@ -64,6 +65,16 @@ Setup:
   <base32_secret> The TOTP secret (Base32, no spaces)
 """
 
+def add_key(name):
+    secret = input(f"2fa key for {name}: ").strip()
+    if not secret:
+        print("No secret entered. Aborting.", file=sys.stderr)
+        sys.exit(1)
+    line = f"{name} 6 {secret}\n"
+    with open(TOTP_FILE, 'a') as f:
+        f.write(line)
+    print(f"Added key for {name} to {TOTP_FILE}")
+
 def main():
     args = sys.argv[1:]
     sort_alpha = False
@@ -72,6 +83,15 @@ def main():
     # Help flag
     if '--help' in args:
         print(HELP_MSG)
+        sys.exit(0)
+    # Add key flag
+    if '-add' in args:
+        idx = args.index('-add')
+        if idx + 1 >= len(args):
+            print("Usage: 2fa -add <name>", file=sys.stderr)
+            sys.exit(1)
+        name = args[idx + 1]
+        add_key(name)
         sys.exit(0)
     # Parse flags
     filtered_args = []
