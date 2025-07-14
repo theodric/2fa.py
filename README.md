@@ -5,6 +5,8 @@ This is an implementation spiritually similar to [rsc/2fa](https://github.com/rs
 
 It uses the exact same ~/.2fa file format as rsc's program.
 
+For _branding_ reasons I've named this 2fa.py, but I recommend renaming the executable to just `2fa` tbh
+
 ```bash
 Usage: 2fa [options] [name]
 
